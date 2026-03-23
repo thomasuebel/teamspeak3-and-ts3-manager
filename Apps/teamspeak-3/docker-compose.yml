@@ -6,25 +6,80 @@ services:
     image: teamspeak:latest
     restart: unless-stopped
     environment:
-      - TS3SERVER_LICENSE_AGREEMENT=accept
+      - TS3SERVER_LICENSE=accept
       - TZ=UTC
     ports:
-      - "9987:9987/udp"   # Voice
-      - "10011:10011"      # ServerQuery (raw TCP)
-      - "30033:30033"      # File Transfer
+      - "9987:9987/udp"
+      - "10011:10011"
+      - "30033:30033"
     volumes:
       - ts3server_data:/var/ts3server
+    x-casaos:
+      envs:
+        - container: TS3SERVER_LICENSE
+          description:
+            en_us: Must be set to 'accept' to agree to the TeamSpeak license agreement
+        - container: TZ
+          description:
+            en_us: Timezone (e.g. Europe/Amsterdam)
+      ports:
+        - container: "9987"
+          description:
+            en_us: TeamSpeak voice (UDP)
+        - container: "10011"
+          description:
+            en_us: ServerQuery raw TCP
+        - container: "30033"
+          description:
+            en_us: File transfer
+      volumes:
+        - container: /var/ts3server
+          description:
+            en_us: TeamSpeak server data (database, logs, files)
 
   teamspeak-manager:
     container_name: teamspeak-manager
     image: joni1802/ts3-manager:latest
     restart: unless-stopped
     ports:
-      - "8080:8080"        # Web UI
+      - "8080:8080"
     depends_on:
       - teamspeak-server
+    x-casaos:
+      ports:
+        - container: "8080"
+          description:
+            en_us: ts3-manager web UI
 
 volumes:
   ts3server_data:
     name: ts3server_data
     driver: local
+
+x-casaos:
+  architectures:
+    - amd64
+  main: teamspeak-server
+  author: ""
+  category: Communication
+  description:
+    en_us: |
+      TeamSpeak 3 is a voice communication platform for gaming and business. This stack includes the official TeamSpeak 3 server and the ts3-manager web interface for easy administration.
+
+      After installation, open the ts3-manager on port 8080 and connect to host 'teamspeak-server', port 10011. Retrieve the one-time ServerQuery admin token from the teamspeak-server container logs.
+  developer: TeamSpeak Systems GmbH
+  icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/teamspeak.png
+  tagline:
+    en_us: Self-hosted voice communication with web-based administration
+  thumbnail: ""
+  title:
+    en_us: TeamSpeak 3
+  tips:
+    before_install:
+      en_us: |
+        By installing this app you accept the TeamSpeak License Agreement (https://www.teamspeak.com/en/teamspeak3-server-license-agreement/).
+
+        After starting, retrieve the one-time ServerQuery admin token from the container logs:
+        docker logs teamspeak-server 2>&1 | grep token
+  port_map: "8080"
+  index: /

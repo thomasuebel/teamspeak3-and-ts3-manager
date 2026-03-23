@@ -30,8 +30,7 @@
   },
   "technical": {
     "architectures": [
-      "amd64",
-      "arm64"
+      "amd64"
     ],
     "platform": "linux",
     "main_service": "teamspeak-server",
@@ -42,7 +41,7 @@
   "deployment": {
     "environment_variables": [
       {
-        "name": "TS3SERVER_LICENSE_AGREEMENT",
+        "name": "TS3SERVER_LICENSE",
         "default": "accept",
         "description": "Must be set to 'accept' to agree to the TeamSpeak license",
         "required": true
@@ -99,6 +98,9 @@
   "compatibility": {
     "casaos": {
       "supported": true,
+      "architectures": [
+        "amd64"
+      ],
       "port_map": "8080",
       "volume_mappings": {
         "ts3server_data": "/DATA/AppData/$AppID/data"
@@ -119,8 +121,7 @@
       "supported": true,
       "tipi_version": 1,
       "supported_architectures": [
-        "amd64",
-        "arm64"
+        "amd64"
       ],
       "volume_mappings": {
         "ts3server_data": "data"
