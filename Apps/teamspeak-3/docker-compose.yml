@@ -3,7 +3,7 @@ name: teamspeak3
 services:
   teamspeak-server:
     container_name: teamspeak-server
-    image: teamspeak:latest
+    image: teamspeak:3.13.7
     restart: unless-stopped
     environment:
       - TS3SERVER_LICENSE=accept
@@ -15,6 +15,12 @@ services:
       - "30033:30033"
     volumes:
       - /DATA/AppData/$AppID/server:/var/ts3server
+    healthcheck:
+      test: ["CMD", "sh", "-c", "nc -z localhost 9987 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
     x-casaos:
       envs:
         - container: TS3SERVER_LICENSE
@@ -25,7 +31,7 @@ services:
             en_us: Timezone (e.g. Europe/Amsterdam)
         - container: TS3SERVER_IP
           description:
-            en_us: IP the server binds and advertises to clients. Set to 0.0.0.0 to listen on all interfaces.
+            en_us: IP the server binds and advertises to clients. Set to 0.0.0.0 to listen on all interfaces. Change to your LAN or public IP if behind NAT.
       ports:
         - container: "9987"
           description:
@@ -43,18 +49,18 @@ services:
 
   teamspeak-manager:
     container_name: teamspeak-manager
-    image: joni1802/ts3-manager:latest
+    image: joni1802/ts3-manager:v2.2.5
     restart: unless-stopped
     ports:
       - "8080:8080"
     depends_on:
-      - teamspeak-server
+      teamspeak-server:
+        condition: service_healthy
     x-casaos:
       ports:
         - container: "8080"
           description:
             en_us: ts3-manager web UI
-
 
 x-casaos:
   architectures:

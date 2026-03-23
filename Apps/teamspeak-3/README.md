@@ -32,7 +32,7 @@ docker compose up -d
 
 ### 3. Get the ServerQuery admin token
 
-On first start, TeamSpeak generates a one-time admin token. Retrieve it from the logs:
+On first start, TeamSpeak generates a one-time admin token. Retrieve it from the container's logs:
 
 ```bash
 docker logs teamspeak-server 2>&1 | grep token
@@ -65,4 +65,6 @@ If you are running behind a NAT or reverse proxy, you may need to set `TS3SERVER
 
 MIT — see [LICENSE](LICENSE).
 
-TeamSpeak is a product of TeamSpeak Systems GmbH and subject to its own [license agreement](https://www.teamspeak.com/en/teamspeak3-server-license-agreement/). ts3-manager is MIT licensed by Jonathan Francke.
+TeamSpeak is a product of TeamSpeak Systems GmbH and subject to its own [license agreement](https://www.teamspeak.com/en/teamspeak3-server-license-agreement/).
+
+A big thank you to [Jonathan Francke](https://github.com/joni1802) for building and maintaining [ts3-manager](https://github.com/joni1802/ts3-manager), released under the MIT license.

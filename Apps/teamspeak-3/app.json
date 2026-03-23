@@ -5,7 +5,7 @@
     "name": "TeamSpeak 3",
     "description": "TeamSpeak 3 server with ts3-manager web interface for easy administration.",
     "tagline": "Voice communication for gaming and business",
-    "version": "latest",
+    "version": "3.13.7",
     "author": "",
     "developer": "TeamSpeak Systems GmbH",
     "category": "Communication",
@@ -51,6 +51,12 @@
         "default": "UTC",
         "description": "Timezone",
         "required": false
+      },
+      {
+        "name": "TS3SERVER_IP",
+        "default": "0.0.0.0",
+        "description": "IP the server binds and advertises to clients. Set to 0.0.0.0 to listen on all interfaces. Change to your LAN or public IP if behind NAT.",
+        "required": false
       }
     ],
     "volumes": [
@@ -70,7 +76,7 @@
         "container": "10011",
         "host": "10011",
         "protocol": "tcp",
-        "description": "TeamSpeak ServerQuery (raw TCP)"
+        "description": "TeamSpeak ServerQuery raw TCP"
       },
       {
         "container": "30033",
@@ -102,9 +108,6 @@
         "amd64"
       ],
       "port_map": "8080",
-      "volume_mappings": {
-        "ts3server_data": "/DATA/AppData/$AppID/data"
-      },
       "port": "8080"
     },
     "portainer": {
@@ -123,9 +126,6 @@
       "supported_architectures": [
         "amd64"
       ],
-      "volume_mappings": {
-        "ts3server_data": "data"
-      },
       "port": "8080"
     },
     "dockge": {
@@ -142,9 +142,6 @@
     "umbrel": {
       "supported": true,
       "manifest_version": 1,
-      "volume_mappings": {
-        "ts3server_data": "data"
-      },
       "port": "10028"
     }
   },
