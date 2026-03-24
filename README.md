@@ -2,6 +2,11 @@
 
 A self-hosted [TeamSpeak 3](https://www.teamspeak.com) server with the [ts3-manager](https://github.com/joni1802/ts3-manager) web interface, packaged as a single `docker-compose.yml`.
 
+| Image | Version |
+|---|---|
+| `teamspeak` | `3.13.7` |
+| `joni1802/ts3-manager` | `v2.2.5` |
+
 ## Quick Start
 
 ```bash
