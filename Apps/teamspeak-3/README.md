@@ -15,6 +15,7 @@ A Docker Compose setup for a self-hosted TeamSpeak 3 server with the [ts3-manage
 |---|---|---|
 | `9987` | UDP | Voice (connect clients here) |
 | `10011` | TCP | ServerQuery (raw TCP) |
+| `10022` | TCP | ServerQuery (SSH) |
 | `30033` | TCP | File transfer |
 | `8080` | TCP | ts3-manager web UI |
 
@@ -60,6 +61,18 @@ Server data (database, logs, uploaded files) is persisted to `/DATA/AppData/team
 If clients cannot upload files or avatars, the cause is usually the server advertising its internal Docker IP for file transfer connections instead of the host IP. The `TS3SERVER_IP=0.0.0.0` environment variable forces the server to bind and advertise on all interfaces, making port `30033` reachable from outside the container.
 
 If you are running behind a NAT or reverse proxy, you may need to set `TS3SERVER_IP` to your actual public or LAN IP address instead of `0.0.0.0`.
+
+## ServerQuery SSH
+
+TeamSpeak supports an SSH-based ServerQuery interface on port `10022` as a secure alternative to the raw TCP interface on port `10011`. SSH ServerQuery is enabled by default in this stack via the `TS3SERVER_QUERY_PROTOCOLS=raw,ssh` environment variable.
+
+On first start with SSH enabled, the server generates an SSH host key at `/var/ts3server/ssh_host_rsa_key`. To connect via SSH ServerQuery:
+
+```bash
+ssh -p 10022 serveradmin@<your-host>
+```
+
+To disable SSH ServerQuery, change `TS3SERVER_QUERY_PROTOCOLS` to `raw`.
 
 ## License
 

@@ -57,6 +57,12 @@
         "default": "0.0.0.0",
         "description": "IP the server binds and advertises to clients. Set to 0.0.0.0 to listen on all interfaces. Change to your LAN or public IP if behind NAT.",
         "required": false
+      },
+      {
+        "name": "TS3SERVER_QUERY_PROTOCOLS",
+        "default": "raw,ssh",
+        "description": "Comma-separated list of enabled ServerQuery protocols. 'raw' enables TCP (port 10011), 'ssh' enables SSH (port 10022).",
+        "required": false
       }
     ],
     "volumes": [
@@ -77,6 +83,12 @@
         "host": "10011",
         "protocol": "tcp",
         "description": "TeamSpeak ServerQuery raw TCP"
+      },
+      {
+        "container": "10022",
+        "host": "10022",
+        "protocol": "tcp",
+        "description": "TeamSpeak ServerQuery SSH"
       },
       {
         "container": "30033",

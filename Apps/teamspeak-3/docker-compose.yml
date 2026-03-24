@@ -9,9 +9,11 @@ services:
       - TS3SERVER_LICENSE=accept
       - TZ=UTC
       - TS3SERVER_IP=0.0.0.0
+      - TS3SERVER_QUERY_PROTOCOLS=raw,ssh
     ports:
       - "9987:9987/udp"
       - "10011:10011"
+      - "10022:10022"
       - "30033:30033"
     volumes:
       - /DATA/AppData/$AppID/server:/var/ts3server
@@ -32,6 +34,9 @@ services:
         - container: TS3SERVER_IP
           description:
             en_us: IP the server binds and advertises to clients. Set to 0.0.0.0 to listen on all interfaces. Change to your LAN or public IP if behind NAT.
+        - container: TS3SERVER_QUERY_PROTOCOLS
+          description:
+            en_us: Enabled ServerQuery protocols (e.g. raw,ssh). 'raw' = TCP port 10011, 'ssh' = SSH port 10022.
       ports:
         - container: "9987"
           description:
@@ -39,6 +44,9 @@ services:
         - container: "10011"
           description:
             en_us: ServerQuery raw TCP
+        - container: "10022"
+          description:
+            en_us: ServerQuery SSH
         - container: "30033"
           description:
             en_us: File transfer
