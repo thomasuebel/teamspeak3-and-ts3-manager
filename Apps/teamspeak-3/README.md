@@ -26,4 +26,4 @@ When you change `docker-compose.yml` — adding a port, a volume, or an environm
 - `deployment.ports` — mirrors the `ports:` section
 - `deployment.volumes` — mirrors the `volumes:` section
 - `deployment.environment_variables` — mirrors the `environment:` section
-- `metadata.version` — should match the image tag in `docker-compose.yml`
+- `metadata.version` — the project release version (e.g. `1.0.1`), updated when cutting a new GitHub release
