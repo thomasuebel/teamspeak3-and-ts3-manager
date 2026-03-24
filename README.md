@@ -79,25 +79,18 @@ App stores that install from a URL expect a `.zip` containing both `docker-compo
 
 ## Installation on CasaOS
 
-1. **Copy the CasaOS release URL from GitHub.** Go to the [latest release](../../releases/latest), right-click `teamspeak-3-casaos.zip` and copy the download URL.
+1. **Copy the CasaOS release URL from GitHub.**
 
-   ![Copy the CasaOS release build URL from GitHub](.github/assets/step-00-copy-the-casa-os-release-build-url-from-github.png)
+Go to the [latest release](../../releases/latest), right-click `teamspeak-3-casaos.zip` and copy the download URL.
 
 2. **Open the CasaOS App Store.**
 
-   ![Open CasaOS AppStore](.github/assets/step-01-open-casa-os-appstore.png)
+Locate the app store source selector and select "More Apps". 
+Paste the URL into the input field and click add.
 
-3. **Locate the app store source selector.**
+![CasaOS App Store](.github/assets/casaos-add-more-app-stores.png)
 
-   ![Locate app store selection](.github/assets/step-02-locate-app-store-selection.png)
-
-4. **Select "More Apps".**
-
-   ![Select More Apps](.github/assets/step-03-select-more-apps.png)
-
-5. **Paste the URL into the input field and install.**
-
-   ![Paste the URL into the input field](.github/assets/step-04-paste-the-url-into-the-input-field.png)
+You can now find and install the app "TeamSpeak 3" in your apps list.
 
 ## Releases
 
